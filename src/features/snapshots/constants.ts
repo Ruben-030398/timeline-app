@@ -1,0 +1,1 @@
+export const SNAPSHOTS_CHUNK_SIZE = 20;

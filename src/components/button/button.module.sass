@@ -1,0 +1,25 @@
+@import ../../sass/_variables
+
+.btn_primary
+  font-size: 1.6rem
+  font-weight: 700
+  text-transform: uppercase
+  color: $color-gray-light
+  background-color: $color-green-light
+  border: none
+  padding: 1.5rem 3rem
+  transition-duration: 200ms
+  cursor: pointer
+  border-radius: 0.5rem
+  &:hover
+    background-color: $color-green-dark
+  &:disabled 
+    background-color: $color-gray-dark
+    cursor: auto
+  
+
+.btn_secondary
+  @extend .btn_primary
+  background-color: $color-red
+  &:hover
+    background-color: $color-red-dark

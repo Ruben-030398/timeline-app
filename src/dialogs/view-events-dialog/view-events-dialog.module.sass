@@ -1,0 +1,62 @@
+@import ../../sass/_variables
+@import ../../sass/_utils
+@import ../../sass/_typography
+
+.view_event
+  background-color: $color-blue-dark
+  padding: 1.5rem
+  min-width: 50rem
+  box-shadow: $box-shadow
+  border-radius: 0.5rem
+  &__title
+    display: flex
+    justify-content: space-between
+    padding-bottom: 2rem
+    border-bottom: 0.1rem solid opacify(rgba($color-gray-dark, 0.7), 0.3)
+  &__body
+    padding-top: 2rem
+    display: flex
+    flex-direction: column
+    gap: 2rem
+    max-height: 40rem
+    overflow-y: auto
+    padding: 1rem
+    &__row
+      width: 100%
+      display: flex
+      justify-content: space-between
+      align-items: center
+      gap: 1rem
+      &__content
+        flex-direction: column
+        display: flex
+        flex: 1
+        gap: 1rem
+        align-self: center
+        p
+          color: $color-red
+          align-self: flex-start
+    &__input
+      flex: 1
+      padding: 0.8rem 0rem 0.8rem 0.7rem
+  &__footer
+    width: 100%
+    display: grid
+    align-items: center
+    padding-top: 2rem
+  &__save_btn
+    justify-self: flex-end
+  &__close_btn
+    padding: 0.5rem
+    height: 3.5rem
+    width: 3.5rem
+    display: flex
+    align-items: center
+    justify-content: center
+  &__remove_btn
+    height: 100%
+    display: flex
+    align-items: center
+    justify-content: center
+    padding: 0.6rem
+    align-self: flex-start

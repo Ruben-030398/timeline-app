@@ -1,0 +1,20 @@
+@import ../../sass/_variables
+@import ../../sass/_base
+
+.video_metadata
+  text-align: start
+  display: flex
+  flex-direction: column
+  justify-content: center
+  margin: 0 auto
+  gap: 2rem
+  font-size: 2rem
+  padding: 2rem
+  box-shadow: $box-shadow
+  margin-bottom: 2rem
+  border-radius: 2rem 
+  @include respond('tab-port')
+    border-radius: 0
+    box-shadow: none
+    display: none
+

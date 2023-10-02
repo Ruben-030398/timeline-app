@@ -1,0 +1,31 @@
+@import ../../sass/_variables
+@import ../../sass/_utils
+
+.add_event
+  background-color: $color-blue-dark
+  padding: 1.5rem
+  min-width: 50rem
+  box-shadow: $box-shadow
+  border-radius: 0.5rem
+  &__title
+    display: flex
+    align-items: center
+    justify-content: space-between
+    margin-bottom: 2rem
+  &__close_btn
+    padding: 0.5rem
+    height: 3.5rem
+    width: 3.5rem
+    display: flex
+    align-items: center
+    justify-content: center
+  &__label
+    display: flex
+    flex-direction: column
+    gap: .8rem
+  &__footer
+    width: 100%
+    display: grid
+    margin-top: 2rem
+  &__save_btn
+    justify-self: flex-end 

@@ -1,0 +1,1 @@
+export const DEFAULT_SNAPSHOT_NODE_WIDTH = 200;
