@@ -17,11 +17,11 @@ const generateSnapshotsMiddleware: Middleware<Dispatch, RootState> = (store) => 
       const { video, skip = 0, limit = SNAPSHOTS_CHUNK_SIZE } = action.payload;
       const duration = Math.floor(video.duration);
 
-      const secondsRange = range(duration);
+      const secondsRange = range(1, duration);
 
-      const chunk = secondsRange.slice(skip + 1, skip + limit + 1)
+      const chunk = secondsRange.slice(skip, Math.min(skip + limit, duration));
 
-      if (!chunk.length) return;
+      if (!chunk.length) return store.dispatch(setVideoSnapshots({ total: duration - 1, snapshots: [] })); 
 
       const snapshots = [] as Array<SnapShot>;
 
@@ -56,7 +56,7 @@ const generateSnapshotsMiddleware: Middleware<Dispatch, RootState> = (store) => 
 
       }, Promise.resolve())
 
-      store.dispatch(setVideoSnapshots({ total: duration, snapshots }))
+      store.dispatch(setVideoSnapshots({ total: duration - 1, snapshots }))
     }
   }
 
