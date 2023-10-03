@@ -12,45 +12,51 @@ const generateSnapshotsMiddleware: Middleware<Dispatch, RootState> = (store) => 
   next(action);
 
   if (generateSnapshots.match(action)) {
-    
-    if (action.payload) {      
+
+    if (action.payload) {
       const { video, skip = 0, limit = SNAPSHOTS_CHUNK_SIZE } = action.payload;
       const duration = Math.floor(video.duration);
 
       const secondsRange = range(duration);
 
-      const chunk = secondsRange.slice(skip, skip + limit)
+      const chunk = secondsRange.slice(skip + 1, skip + limit + 1)
 
       if (!chunk.length) return;
 
       const snapshots = [] as Array<SnapShot>;
 
-      for (const i of chunk) {
+      await chunk.reduce(async (prevPromise, second) => {
+        await prevPromise;
 
-        await new Promise((res) => {
+        return new Promise((res) => {
           setTimeout(() => {
             const canvas = document.createElement('canvas');
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
-        
-            video.currentTime = i;
+
             video.pause();
-        
-            const context = canvas.getContext('2d');
-            context?.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-        
-            const snapshotDataUrl = canvas.toDataURL('image/png');
-            const id = nanoid();
-        
-            snapshots.push({ snapshot: snapshotDataUrl, id });
-        
-            res({ snapshot: snapshotDataUrl, id });
+
+            video.ontimeupdate = () => {
+              const context = canvas.getContext('2d');
+              context?.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+  
+              const snapshotDataUrl = canvas.toDataURL('image/png');
+              const id = nanoid();
+  
+              snapshots.push({ snapshot: snapshotDataUrl, id });
+
+              video.ontimeupdate = null;
+
+              res();
+            }
+
+            video.currentTime = second;
           }, 100)
         })
-      }    
-      
-      
-      store.dispatch(setVideoSnapshots({ total: duration, snapshots: snapshots as Array<SnapShot>}))
+
+      }, Promise.resolve())
+
+      store.dispatch(setVideoSnapshots({ total: duration, snapshots }))
     }
   }
 
