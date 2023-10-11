@@ -1,5 +1,9 @@
+@import ../../sass/_base
+  
 .video_uploader
-  text-align: center
+  text-align: center 
   grid-column: 1 / -1
   &__input
     display: none
+  @include respond('tab-port')
+    grid-row: 6 /8
